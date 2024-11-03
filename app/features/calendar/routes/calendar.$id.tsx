@@ -23,8 +23,12 @@ import { Table } from "~/components/Table";
 import { useUser } from "~/features/auth/core/user";
 import { requireUserId } from "~/features/auth/core/user.server";
 import * as CalendarRepository from "~/features/calendar/CalendarRepository.server";
+import * as ShowcaseTournaments from "~/features/front-page/core/ShowcaseTournaments.server";
 import { MapPool } from "~/features/map-list-generator/core/map-pool";
-import { clearTournamentDataCache } from "~/features/tournament-bracket/core/Tournament.server";
+import {
+	clearTournamentDataCache,
+	tournamentManagerData,
+} from "~/features/tournament-bracket/core/Tournament.server";
 import { useIsMounted } from "~/hooks/useIsMounted";
 import { i18next } from "~/modules/i18n/i18next.server";
 import {
@@ -37,7 +41,7 @@ import {
 	type SendouRouteHandle,
 	notFoundIfFalsy,
 	validate,
-} from "~/utils/remix";
+} from "~/utils/remix.server";
 import { makeTitle } from "~/utils/strings";
 import {
 	CALENDAR_PAGE,
@@ -65,13 +69,20 @@ export const action: ActionFunction = async ({ params, request }) => {
 		await CalendarRepository.findById({ id: parsedParams.id }),
 	);
 
-	validate(
-		canDeleteCalendarEvent({
-			user,
-			event,
-			startTime: databaseTimestampToDate(event.startTimes[0]),
-		}),
-	);
+	if (event.tournamentId) {
+		validate(
+			tournamentManagerData(event.tournamentId).stage.length === 0,
+			"Tournament has already started",
+		);
+	} else {
+		validate(
+			canDeleteCalendarEvent({
+				user,
+				event,
+				startTime: databaseTimestampToDate(event.startTimes[0]),
+			}),
+		);
+	}
 
 	await CalendarRepository.deleteById({
 		eventId: event.eventId,
@@ -80,6 +91,8 @@ export const action: ActionFunction = async ({ params, request }) => {
 
 	if (event.tournamentId) {
 		clearTournamentDataCache(event.tournamentId);
+		ShowcaseTournaments.clearParticipationInfoMap();
+		ShowcaseTournaments.clearCachedTournaments();
 	}
 
 	throw redirect(CALENDAR_PAGE);

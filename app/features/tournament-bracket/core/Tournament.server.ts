@@ -2,15 +2,18 @@ import * as TournamentRepository from "~/features/tournament/TournamentRepositor
 import { HACKY_resolvePicture } from "~/features/tournament/tournament-utils";
 import type { TournamentManagerDataSet } from "~/modules/brackets-manager/types";
 import { isAdmin } from "~/permissions";
-import { notFoundIfFalsy } from "~/utils/remix";
+import { notFoundIfFalsy } from "~/utils/remix.server";
 import type { Unwrapped } from "~/utils/types";
 import { Tournament } from "./Tournament";
 import { getServerTournamentManager } from "./brackets-manager/manager.server";
 
 const manager = getServerTournamentManager();
 
+export const tournamentManagerData = (tournamentId: number) =>
+	manager.get.tournamentData(tournamentId);
+
 const combinedTournamentData = async (tournamentId: number) => ({
-	data: manager.get.tournamentData(tournamentId),
+	data: tournamentManagerData(tournamentId),
 	ctx: notFoundIfFalsy(await TournamentRepository.findById(tournamentId)),
 });
 
