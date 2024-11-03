@@ -116,17 +116,17 @@ export const homemadeBadges: BadgeInfo[] = [
 	},
 	{
 		displayName: "Pinch Zach's Bank",
-		filename: "pinchzachsbank",
+		fileName: "pinchzachsbank",
 		authorDiscordId: "528851510222782474",
 	},
 	{
 		displayName: "Pou Basket",
-		filename: "pou",
+		fileName: "pou",
 		authorDiscordId: "285896534380511234",
 	},
 	{
 		displayName: "Blue Pou Achievement",
-		filename: "pou_b",
+		fileName: "pou_b",
 		authorDiscordId: "285896534380511234",
 	},
 	{
