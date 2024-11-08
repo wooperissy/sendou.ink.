@@ -15,6 +15,21 @@ export const homemadeBadges: BadgeInfo[] = [
 	// 	authorDiscordId: "123456789012345678",
 	// },
 	{
+		displayName: "Turf War Takedown",
+		fileName: "turf1230",
+		authorDiscordId: "1170249805373657093",
+	},
+	{
+		displayName: "Turf War Takedown (Special)",
+		fileName: "turf12300",
+		authorDiscordId: "1170249805373657093",
+	},
+	{
+		displayName: "Peashooter Achievement",
+		fileName: "peashooter",
+		authorDiscordId: "789943264370884708",
+	},
+	{
 		displayName: "TFS Tourneys",
 		fileName: "tfstourney",
 		authorDiscordId: "789943264370884708",
@@ -185,6 +200,21 @@ export const homemadeBadges: BadgeInfo[] = [
 		authorDiscordId: "570323825669963972",
 	},
 	{
+		displayName: "Minus One Cup",
+		fileName: "minus-one-cup",
+		authorDiscordId: "569271521776762896",
+	},
+	{
+		displayName: "Minus One Cup (Coach)",
+		fileName: "minus-one-cup-coach",
+		authorDiscordId: "569271521776762896",
+	},
+	{
+		displayName: "Minus One Open",
+		fileName: "minus-one-open",
+		authorDiscordId: "569271521776762896",
+	},
+	{
 		displayName: "Karot's Tourneys (100 KT Power)",
 		fileName: "ktlow",
 		authorDiscordId: "1170249805373657093",
@@ -288,5 +318,25 @@ export const homemadeBadges: BadgeInfo[] = [
 		displayName: "Frostbite Ascent (Top 8)",
 		fileName: "frostbitebase2x",
 		authorDiscordId: "354880982890971136",
+	},
+	{
+		displayName: "Biggest Fish in the Sea",
+		fileName: "bfis",
+		authorDiscordId: "629773997822967819",
+	},
+	{
+		displayName: "Squeaky Clean Scrap",
+		fileName: "wiper",
+		authorDiscordId: "528851510222782474",
+	},
+	{
+		displayName: "Chi-Shoals",
+		fileName: "chishoals",
+		authorDiscordId: "528851510222782474",
+	},
+	{
+		displayName: "Shark Tank: Deep Waters",
+		fileName: "blahajopen",
+		authorDiscordId: "528851510222782474",
 	},
 ];
