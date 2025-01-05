@@ -484,4 +484,9 @@ export const homemadeBadges: BadgeInfo[] = [
 		fileName: "manshine",
 		authorDiscordId: "528851510222782474",
 	},
+  {
+		displayName: "Catgirl Challenge",
+		fileName: "headband",
+		authorDiscordId: "789943264370884708",
+	},
 ];
