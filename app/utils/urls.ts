@@ -1,5 +1,4 @@
 import slugify from "slugify";
-import type navItems from "~/components/layout/nav-items.json";
 import type { Preference } from "~/db/tables";
 import type {
 	Art,
@@ -135,6 +134,7 @@ export const TIERS_PAGE = "/tiers";
 export const SUSPENDED_PAGE = "/suspended";
 export const LFG_PAGE = "/lfg";
 export const SETTINGS_PAGE = "/settings";
+export const LUTI_PAGE = "/luti";
 
 export const BLANK_IMAGE_URL = "/static-assets/img/blank.gif";
 export const COMMON_PREVIEW_IMAGE =
@@ -314,6 +314,8 @@ export const tournamentBracketsPage = ({
 		query.size > 0 ? `?${query.toString()}` : ""
 	}`;
 };
+export const tournamentDivisionsPage = (tournamentId: number) =>
+	`/to/${tournamentId}/divisions`;
 export const tournamentResultsPage = (tournamentId: number) =>
 	`/to/${tournamentId}/results`;
 export const tournamentBracketsSubscribePage = (tournamentId: number) =>
@@ -420,7 +422,7 @@ export const badgeUrl = ({
 export const articlePreviewUrl = (slug: string) =>
 	`/static-assets/img/article-previews/${slug}.png`;
 
-export const navIconUrl = (navItem: (typeof navItems)[number]["name"]) =>
+export const navIconUrl = (navItem: string) =>
 	`/static-assets/img/layout/${navItem}`;
 export const gearImageUrl = (gearType: GearType, gearSplId: number) =>
 	`/static-assets/img/gear/${gearType.toLowerCase()}/${gearSplId}`;

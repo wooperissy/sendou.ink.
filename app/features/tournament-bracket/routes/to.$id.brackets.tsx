@@ -430,6 +430,10 @@ export default function TournamentBracketsPage() {
 		).length;
 	};
 
+	if (tournament.isLeagueSignup) {
+		return null;
+	}
+
 	return (
 		<div>
 			{visibility !== "hidden" && !tournament.everyBracketOver ? (
@@ -471,6 +475,8 @@ export default function TournamentBracketsPage() {
 								⚠️{" "}
 								{bracketIdx === 0 ? (
 									<>Tournament start time is in the future</>
+								) : bracket.startTime && bracket.startTime > new Date() ? (
+									<>Bracket start time is in the future</>
 								) : (
 									<>Teams pending from the previous bracket</>
 								)}{" "}

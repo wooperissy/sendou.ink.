@@ -80,6 +80,10 @@ export default [
 
 		route("brackets", "features/tournament-bracket/routes/to.$id.brackets.tsx"),
 		route(
+			"divisions",
+			"features/tournament-bracket/routes/to.$id.divisions.tsx",
+		),
+		route(
 			"brackets/subscribe",
 			"features/tournament-bracket/routes/to.$id.brackets.subscribe.tsx",
 		),
@@ -92,6 +96,7 @@ export default [
 			"features/tournament-bracket/routes/to.$id.matches.$mid.subscribe.tsx",
 		),
 	]),
+	route("luti", "features/tournament/routes/luti.tsx"),
 
 	...prefix("/org/:slug", [
 		index("features/tournament-organization/routes/org.$slug.tsx"),

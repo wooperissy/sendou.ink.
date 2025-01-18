@@ -22,6 +22,8 @@ Any badge to be added has to follow these rules. Badges that do not follow the r
 
 **As tournament prizes** the badge are meant to be given out as tournament prizes (awarded for reaching certain placement). If you have any other idea in mind then you need to check that with Sendou separately.
 
+**One badge per tournament** as described above badges are meant to given out as tournament prizes and on top of that the basic rule is one badge can be earned by playing one tournament. If any other idea you need to check that with Sendou separately.
+
 ## Adding a new badge
 
 1. First badge needs to be made

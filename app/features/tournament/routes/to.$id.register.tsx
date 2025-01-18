@@ -119,20 +119,22 @@ export default function TournamentRegisterPage() {
 							</Link>
 						)}
 					</div>
-					<div className="tournament__by mt-2">
-						<div className="stack horizontal xs items-center">
-							<ClockIcon className="tournament__info__icon" />{" "}
-							{isMounted
-								? tournament.ctx.startTime.toLocaleString(i18n.language, {
-										timeZoneName: "short",
-										minute: startsAtEvenHour ? undefined : "numeric",
-										hour: "numeric",
-										day: "numeric",
-										month: "long",
-									})
-								: null}
+					{!tournament.isLeagueSignup ? (
+						<div className="tournament__by mt-2">
+							<div className="stack horizontal xs items-center">
+								<ClockIcon className="tournament__info__icon" />{" "}
+								{isMounted
+									? tournament.ctx.startTime.toLocaleString(i18n.language, {
+											timeZoneName: "short",
+											minute: startsAtEvenHour ? undefined : "numeric",
+											hour: "numeric",
+											day: "numeric",
+											month: "long",
+										})
+									: null}
+							</div>
 						</div>
-					</div>
+					) : null}
 					<div className="stack horizontal sm mt-1">
 						{tournament.ranked ? (
 							<div className="tournament__badge tournament__badge__ranked">
@@ -411,10 +413,12 @@ function RegistrationProgress({
 					completed: mapPool && mapPool.length > 0,
 				}
 			: null,
-		{
-			name: t("tournament:pre.steps.check-in"),
-			completed: checkedIn,
-		},
+		!tournament.isLeagueSignup
+			? {
+					name: t("tournament:pre.steps.check-in"),
+					completed: checkedIn,
+				}
+			: null,
 	]);
 
 	const regClosesBeforeStart =
@@ -422,7 +426,10 @@ function RegistrationProgress({
 		tournament.ctx.startTime.getTime();
 
 	const registrationClosesAtString = isMounted
-		? tournament.registrationClosesAt.toLocaleTimeString(i18n.language, {
+		? (tournament.isLeagueSignup
+				? tournament.ctx.startTime
+				: tournament.registrationClosesAt
+			).toLocaleTimeString(i18n.language, {
 				minute: "numeric",
 				hour: "numeric",
 				day: "2-digit",
@@ -456,22 +463,24 @@ function RegistrationProgress({
 						);
 					})}
 				</div>
-				<CheckIn
-					canCheckIn={steps.filter((step) => !step.completed).length === 1}
-					status={
-						tournament.regularCheckInIsOpen
-							? "OPEN"
-							: tournament.regularCheckInHasEnded
-								? "OVER"
-								: "UPCOMING"
-					}
-					startDate={tournament.regularCheckInStartsAt}
-					endDate={tournament.regularCheckInEndsAt}
-					checkedIn={checkedIn}
-				/>
+				{!tournament.isLeagueSignup ? (
+					<CheckIn
+						canCheckIn={steps.filter((step) => !step.completed).length === 1}
+						status={
+							tournament.regularCheckInIsOpen
+								? "OPEN"
+								: tournament.regularCheckInHasEnded
+									? "OVER"
+									: "UPCOMING"
+						}
+						startDate={tournament.regularCheckInStartsAt}
+						endDate={tournament.regularCheckInEndsAt}
+						checkedIn={checkedIn}
+					/>
+				) : null}
 			</section>
 			<div className="tournament__section__warning">
-				{regClosesBeforeStart ? (
+				{regClosesBeforeStart || tournament.isLeagueSignup ? (
 					<span className="text-warning">
 						Registration closes at {registrationClosesAtString}
 					</span>
@@ -671,6 +680,17 @@ function TeamInfo({
 							{t("tournament:pre.info.unregister")}
 						</Button>
 					</FormWithConfirm>
+				) : null}
+				{canUnregister &&
+				tournament.isLeagueSignup &&
+				!tournament.registrationOpen ? (
+					<Popover
+						triggerClassName="minimal-destructive tiny build__small-text"
+						buttonChildren={t("tournament:pre.info.unregister")}
+					>
+						Unregistration from a league after the registration has ended is
+						handled by the organizers
+					</Popover>
 				) : null}
 			</div>
 			<section className="tournament__section">
