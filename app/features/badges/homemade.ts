@@ -508,7 +508,7 @@ export const homemadeBadges: BadgeInfo[] = [
 		displayName: "Catgirl Challenge",
 		fileName: "headband",
 		authorDiscordId: "789943264370884708",
- 	},
+	},
 	{
 		displayName: "Reef-Lux Achievement",
 		fileName: "flux",
